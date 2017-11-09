@@ -1,5 +1,7 @@
 #!/usr/bin/env bash
 
+# this script can be used to rotate your AWS credentials
+
 # this script will backup the aws credentials file in $HOME/.aws by appending the PID of the script
 # edit the aws credentials file location if you are not using the default location
 AWS_CREDENTIALS_FILE=$HOME/.aws/credentials
@@ -8,6 +10,7 @@ AWS_CREDENTIALS_FILE=$HOME/.aws/credentials
 function get_aws_access_keys() {
     access_key=$(aws configure get profile.${profile}.aws_access_key_id)
 }
+
 
 function create_aws_keys() {
     read new_access_key new_secret_key <<<$(aws iam create-access-key --profile ${profile} --output=text | awk '{print $2 " " $4}')
